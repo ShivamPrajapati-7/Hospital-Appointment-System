@@ -1,39 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_marginTop="30dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="@drawable/login_background"
-    android:orientation="vertical">
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
 
-    <EditText
-        android:id="@+id/emailAddress"
-        android:layout_width="350dp"
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="99dp"
+        android:src="@drawable/logo" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="386dp"
+        android:src="@drawable/backhospital" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bars"
-        android:layout_marginBottom="20dp"
-        android:padding="20dp"
-        android:hint="Email"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="22dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="20dp">
 
-        android:inputType="textEmailAddress" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:padding="30dp">
 
-    <EditText
-        android:id="@+id/Password"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bars"
-        android:layout_marginBottom="20dp"
-        android:padding="20dp"
-        android:hint="Password"
-        android:inputType="textPassword" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical">
 
-    <Button
-        android:id="@+id/loginbtn"
-        android:layout_width="100dp"
-        android:padding="20dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/loginbtn_color"
-        android:text="Login" />
-</LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+
+                    android:text="Welcome Back!"
+                    android:textColor="@color/text_color"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="Login to continue"
+
+                    android:textColor="@color/text_color" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <EditText
+                    android:id="@+id/email_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/login_area"
+                    android:ems="10"
+                    android:drawablePadding="16dp"
+                    android:drawableStart="@drawable/envelop"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:padding="15dp" />
+
+
+                <EditText
+                    android:id="@+id/pass_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/login_area"
+                    android:ems="10"
+                    android:drawablePadding="16dp"
+                    android:drawableStart="@drawable/lock"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="15dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="30dp"
+                    android:text="Forgot password?"
+                    android:textColor="@color/link" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btLogin"
+                    android:layout_width="350dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/login"
+                    android:text="Login"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <!-- Left Line -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="#D0D0D0" />
+
+                <!-- Text -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="Don't have an account"
+                    android:textColor="#666666"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Right Line -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="#D0D0D0" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+
+                android:id="@+id/btnRegistation"
+                android:layout_width="350dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:background="@drawable/register"
+                android:backgroundTint="@null"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                android:text="Register"
+                android:textAllCaps="false"
+                android:textColor="#1565C0"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
+
+
