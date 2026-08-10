@@ -6,9 +6,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +34,11 @@ class MainActivity : AppCompatActivity() {
             var intent=Intent(this, Login_Activity::class.java)
             startActivity(intent)
 
+        }
+
+        btnregistor.setOnClickListener {
+            var intent= Intent(this, Registration_Actvity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -1,15 +1,12 @@
 package com.shivaminteractive.hospital_appointment_system
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class Login_Activity : AppCompatActivity() {
 
@@ -29,5 +26,10 @@ class Login_Activity : AppCompatActivity() {
 
         login=findViewById(R.id.btLogin)
         register=findViewById(R.id.btnRegistation)
+
+        register.setOnClickListener {
+            var intent= Intent(this, Registration_Actvity::class.java)
+            startActivity(intent)
+        }
     }
 }

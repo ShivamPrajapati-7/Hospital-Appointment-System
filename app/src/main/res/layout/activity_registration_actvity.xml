@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="Create Your Account"
+                    android:textColor="@color/text_color"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:text="Join us and get started"
+
+                    android:textColor="@color/text_color" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/Doctor_registration"
+                    android:background="@drawable/login"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Doctor"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/Patient_registration"
+                    android:background="@drawable/noramlbtn"
+                    android:textStyle="bold"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_marginStart="8dp"
+                    android:text="Patient"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="678dp" />
+
+        </LinearLayout>
+</LinearLayout>
