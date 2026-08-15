@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         btnlogin.setOnClickListener {
 
+            //var intent=Intent(this, Login_Activity::class.java)
             var intent=Intent(this, Login_Activity::class.java)
             startActivity(intent)
 

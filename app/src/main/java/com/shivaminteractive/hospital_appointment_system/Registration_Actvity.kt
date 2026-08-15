@@ -28,7 +28,7 @@ class Registration_Actvity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, DoctorRegistrationFragment())
+                .replace(R.id.fragment_container, DoctorRagistrationFragement())
                 .commit()
         }
 
@@ -83,7 +83,7 @@ class Registration_Actvity : AppCompatActivity() {
         )
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, DoctorRegistrationFragment())
+            .replace(R.id.fragment_container, DoctorRagistrationFragement())
             .commit()
     }
 }

@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/Patient_Registration_fragment"
+    android:id="@+id/Docter_Registration_fragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    tools:context=".DoctorRagistrationFragement">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
 
             <EditText
@@ -72,6 +69,20 @@
 
             </LinearLayout>
 
+            <EditText
+                android:id="@+id/Doctor_licence_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/login_area"
+                android:drawableStart="@drawable/licence"
+                android:drawablePadding="16dp"
+                android:ems="10"
+                android:hint="Licence Number"
+                android:inputType="textEmailAddress"
+                android:padding="15dp" />
+
 
             <EditText
                 android:id="@+id/email_input"
@@ -86,23 +97,6 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="15dp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Blood Group">
-
-                <Spinner
-                    android:id="@+id/BloodGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:background="@drawable/login_area"
-                    android:layout_marginBottom="20dp"
-                    android:entries="@array/blood_groups"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
 
 
             <EditText
@@ -174,9 +168,8 @@
 
 
         </LinearLayout>
+
     </ScrollView>
-
-
 
 
 </FrameLayout>

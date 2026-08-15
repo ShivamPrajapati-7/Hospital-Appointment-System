@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FF000000</color>
+    <color name="black">#FFFFFFFF</color>
     <color name="login_background">#5B5B5B</color>
     <color name="loginbtn_color">#195D54</color>
     <color name="main_loginbtn_color">#106CF8</color>
@@ -9,8 +9,5 @@
     <color name="text_color">#001938</color>
     <color name="login_area_border">#4F4F50</color>
     <color name="nav">#BCBCBC</color>
-    <color name="background">#FFFFFF</color>
-    <color name="pending">#77FFC400</color>
-    <color name="complete">#7A76FF03</color>
 
 </resources>
