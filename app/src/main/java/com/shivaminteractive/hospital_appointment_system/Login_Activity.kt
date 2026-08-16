@@ -44,11 +44,11 @@ class Login_Activity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-//            if(email_input.text.toString()==patdefuser && pass_input.text.toString()==defpass)
-//            {
-//                var intent= Intent(this, Patient_DashBoard_Activity::class.java)
-//                startActivity(intent)
-//            }
+            if(email_input.text.toString()==patdefuser && pass_input.text.toString()==defpass)
+            {
+                var intent= Intent(this, patient_dashboard_activity::class.java)
+                startActivity(intent)
+            }
 
             else{
                 var password=pass_input.text.toString()

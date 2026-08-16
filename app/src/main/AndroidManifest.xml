@@ -54,6 +54,10 @@
             android:name=".Doctor_DashBoard_Activity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".patient_dashboard_activity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
