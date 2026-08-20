@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
+    android:gravity="center|center_vertical"
     tools:context=".Doctor_DashBoard_Activity">
 
     <com.google.android.material.card.MaterialCardView
@@ -31,6 +32,7 @@
 
             <!-- Menu button -->
             <ImageButton
+                android:id="@+id/hamburger"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -47,6 +49,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/patient_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hello, Anjali "
@@ -64,6 +67,7 @@
 
             <!-- Profile -->
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/patient_profile_image"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:scaleType="centerCrop"
@@ -105,6 +109,7 @@
                 android:textSize="14sp"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/book_appointment"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -127,6 +132,7 @@
             android:layout_marginRight="10dp"
             app:cardCornerRadius="10dp">
             <LinearLayout
+                android:id="@+id/book_appointment_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/appointment_bar"
@@ -162,6 +168,7 @@
             android:layout_marginRight="10dp"
             android:layout_gravity="center">
             <LinearLayout
+                android:id="@+id/medical_records"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/appointment_bar"
@@ -196,6 +203,7 @@
             android:layout_weight="1"
             app:cardCornerRadius="10dp">
             <LinearLayout
+                android:id="@+id/prescription"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/appointment_bar"
@@ -251,6 +259,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/all_appointments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View All >" />
@@ -264,6 +273,7 @@
                 android:padding="5dp">
 
                 <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/doctor_profile_photo"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:padding="2dp"
@@ -279,21 +289,25 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/dotor_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dr.Unnati Pal"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/doctor_secilization"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="General Physician" />
 
                     <TextView
+                        android:id="@+id/appointment_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
+                        android:id="@+id/hospital_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Health Care+" />
@@ -307,6 +321,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/appointment_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -319,6 +334,7 @@
 
 
                     <TextView
+                        android:id="@+id/doctor_details"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/register"
@@ -372,6 +388,7 @@
                     android:layout_weight="1">
 
                     <LinearLayout
+                        android:id="@+id/health_tips"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -403,6 +420,7 @@
                     android:layout_weight="1">
 
                     <LinearLayout
+                        android:id="@+id/precautions"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -435,6 +453,7 @@
                     android:layout_weight="1">
 
                     <LinearLayout
+                        android:id="@+id/feedback"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
@@ -451,7 +470,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Doctor\nFeedback"/>
+                            android:text="Feedback"/>
 
 
                     </LinearLayout>

@@ -21,7 +21,7 @@
 
 
             <EditText
-                android:id="@+id/Doctor_Full_name"
+                android:id="@+id/patient_Full_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -39,31 +39,35 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <EditText
-                    android:id="@+id/Doctor_Date_Of_Birth"
+                    android:id="@+id/patient_Date_Of_Birth"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginBottom="20dp"
+                    android:clickable="true"
+                    android:focusable="false"
                     android:background="@drawable/login_area"
                     android:drawableStart="@drawable/envelop"
                     android:drawablePadding="16dp"
                     android:ems="10"
-                    android:hint="Date Of Birth"
                     android:inputType="date"
                     android:padding="15dp"
                     android:layout_marginRight="20dp"/>
                 <RadioGroup
+                    android:id="@+id/patient_gender_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/Male"
                         android:text="M"
                         android:layout_marginRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <RadioButton
+                        android:id="@+id/Female"
                         android:text="F"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -102,7 +106,7 @@
 
 
             <EditText
-                android:id="@+id/Doctor_phone"
+                android:id="@+id/patient_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -116,7 +120,7 @@
                 android:padding="15dp" />
 
             <EditText
-                android:id="@+id/doctor_password"
+                android:id="@+id/patient_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -131,7 +135,7 @@
 
 
             <EditText
-                android:id="@+id/doctor_confirm_password"
+                android:id="@+id/patient_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -145,7 +149,7 @@
                 android:padding="15dp" />
 
             <CheckBox
-                android:id="@+id/textView"
+                android:id="@+id/concent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
@@ -153,7 +157,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
 
-                android:id="@+id/btnRegistation"
+                android:id="@+id/btnpatientregistation"
                 android:layout_width="200dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center"
@@ -167,7 +171,6 @@
                 android:textColor="#1565C0"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
 
         </LinearLayout>
     </ScrollView>

@@ -12,6 +12,7 @@ import androidx.core.text.set
 
 class Login_Activity : AppCompatActivity() {
 
+
     lateinit var email_input: EditText
     lateinit var pass_input: EditText
     lateinit var login:Button
@@ -20,23 +21,23 @@ class Login_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        //Username and password declaration
         setContentView(R.layout.activity_login)
         val patdefuser="patient"
         val docdefuser="doctor";
         val defpass="admin";
+
+        //Finded by ids'
         email_input=findViewById(R.id.email_input)
         pass_input=findViewById(R.id.pass_input)
-
         login=findViewById(R.id.btLogin)
         register=findViewById(R.id.btnRegistation)
 
 
+
+        //Login btn
         login.setOnClickListener {
-
-
-//            var intent= Intent(this, Doctor_DashBoard_Activity::class.java)
-//            startActivity(intent)
-
 
             if(email_input.text.toString()==docdefuser && pass_input.text.toString()==defpass)
             {
@@ -55,11 +56,9 @@ class Login_Activity : AppCompatActivity() {
                 password=""
                 Toast.makeText(this, "Incorrect Credentials",Toast.LENGTH_LONG).show()
             }
-
-
-
         }
 
+            //Register btn
         register.setOnClickListener {
             var intent= Intent(this, Registration_Actvity::class.java)
             startActivity(intent)

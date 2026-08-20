@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
+
+        //finding by id's
         btnlogin=findViewById(R.id.btnLogin)
         btnregistor=findViewById(R.id.btnRegister)
 
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         con_patient=findViewById(R.id.con_patient)
 
 
-
+        //login btn
         btnlogin.setOnClickListener {
 
             //var intent=Intent(this, Login_Activity::class.java)
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        //register btn
         btnregistor.setOnClickListener {
             var intent= Intent(this, Registration_Actvity::class.java)
             startActivity(intent)
