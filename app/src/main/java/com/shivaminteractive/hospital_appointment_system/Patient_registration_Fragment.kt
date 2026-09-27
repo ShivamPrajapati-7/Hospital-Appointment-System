@@ -17,6 +17,9 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
 
 class Patient_registration_Fragment : Fragment() {
@@ -35,6 +38,8 @@ class Patient_registration_Fragment : Fragment() {
     lateinit var patient_confirm_password: EditText
     var ispass=false
      var gender:String=" "
+    private val auth = FirebaseAuth.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
 
     @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
@@ -102,21 +107,55 @@ class Patient_registration_Fragment : Fragment() {
 
         //Registration Button
         btnpatientregistration.setOnClickListener {
+            val fullname = name.text.toString().trim()
+            val email = email_input.text.toString().trim()
+            val phoneNumber = patient_phone.text.toString().trim()
+            val date_of_birth = dob.text.toString().trim()
+            val bloodgroup = BloodGroup.selectedItem.toString().trim()
+            val pass = patient_password.text.toString().trim()
+            val conf_pass= patient_confirm_password.text.toString().trim()
 
-                    val bloodgroup=BloodGroup.selectedItem.toString()
-                   val status = "Patient"
-                   val fullname = name.text.toString()
-                   (activity as Registration_Actvity).takedata(fullname,gender,email_input.text.toString(),patient_phone.text.toString(),bloodgroup,status)
 
+            registerPatient(fullname, email, phoneNumber, date_of_birth, bloodgroup, pass, conf_pass)
 
         }
-
-
-
-
-
-
         return view
+    }
+
+    private fun registerPatient( fullname:String, email: String, phoneNumber: String, date_of_birth: String, bloodgroup: String,pass:String,conf_pass:String) {
+
+        auth.createUserWithEmailAndPassword(email,pass)
+            .addOnSuccessListener { sucess->
+                val uid=sucess.user!!.uid
+
+                val patientData = hashMapOf(
+                    "fullname" to fullname,
+                    "email" to email,
+                    "phoneNumber" to phoneNumber,
+                    "date_of_birth" to date_of_birth,
+                    "bloodgroup" to bloodgroup,
+                    "gender" to gender,
+                    "role" to "patient")
+
+                db.collection("patients").document(uid).set(patientData)
+                    .addOnSuccessListener { success ->
+                        startActivity(Intent(context, patient_dashboard_activity::class.java))
+                        Toast.makeText(context, "Successfull registration", Toast.LENGTH_SHORT).show()
+
+                    }
+                    .addOnFailureListener { fail->
+                        Toast.makeText(context, "Firestore : ${fail.message}", Toast.LENGTH_SHORT).show()
+                    }
+
+
+            }
+            .addOnFailureListener { fail->
+
+                Toast.makeText(context, "FireAuth : ${fail.message}", Toast.LENGTH_SHORT).show()
+
+            }
+
+
     }
 
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "560327260587",
+    "project_id": "hospital-appointment-sys-d113c",
+    "storage_bucket": "hospital-appointment-sys-d113c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560327260587:android:745da99c88cb05fb5bbaee",
+        "android_client_info": {
+          "package_name": "com.shivaminteractive.hospital_appointment_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAv_STuGVF8EYNrJocamjSpkVYwAo3w-V0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

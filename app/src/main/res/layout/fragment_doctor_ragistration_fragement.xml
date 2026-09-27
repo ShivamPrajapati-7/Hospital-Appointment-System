@@ -49,17 +49,20 @@
                     android:padding="15dp"
                     android:layout_marginRight="20dp"/>
                 <RadioGroup
+                    android:id="@+id/gender_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/male"
                         android:text="M"
                         android:layout_marginRight="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <RadioButton
+                        android:id="@+id/female"
                         android:text="F"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -143,7 +146,7 @@
                 android:padding="15dp" />
 
             <CheckBox
-                android:id="@+id/textView"
+                android:id="@+id/consent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
