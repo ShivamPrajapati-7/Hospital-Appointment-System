@@ -115,10 +115,11 @@ class DoctorRagistrationFragement : Fragment() {
                     "phone" to phoneNumber,
                     "dob" to date_of_birth,
                     "licence" to licence,
-                    "gender" to gender
+                    "gender" to gender,
+                    "role" to "doctor"
                 )
 
-                db.collection("Doctor").document(uid).set(doctordata)
+                db.collection("users").document(uid).set(doctordata)
                     .addOnSuccessListener { success->
                         startActivity(Intent(context, Doctor_DashBoard_Activity::class.java))
                         Toast.makeText(context,"Registration Successful",Toast.LENGTH_SHORT).show()

@@ -1,6 +1,5 @@
 package com.shivaminteractive.hospital_appointment_system
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -9,12 +8,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarMenu
-import com.google.android.material.navigation.NavigationView
+import com.google.firebase.firestore.FirebaseFirestore
 
 class patient_dashboard_activity : AppCompatActivity() {
 
@@ -38,6 +35,8 @@ class patient_dashboard_activity : AppCompatActivity() {
     lateinit var precautions: LinearLayout
     lateinit var feedback: LinearLayout
 
+    private val db = FirebaseFirestore.getInstance()
+
 
 
 
@@ -53,19 +52,14 @@ class patient_dashboard_activity : AppCompatActivity() {
             insets
         }
 
-        patient_name=findViewById(R.id.patient_name)
 
+//        patient_name.text="Hello, $name"
+        val navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-        //Data transfer to another activity
-        val name=intent.getStringExtra("fullname")
-        val gender=intent.getStringExtra("gender")
-        val email=intent.getStringExtra("email")
-        val phoneNumber=intent.getStringExtra("phone_no")
-        val bloodgroup=intent.getStringExtra("BloodGroup")
-        patient_name.text="Hello, $name"
-        val navigationView = findViewById< BottomNavigationView>(R.id.bottomNavigationView)
-
-
+        val uid = intent.getStringExtra("uid")
+        if (uid != null) {
+            getdata(uid)
+        }
         //bottom navigation bar
         navigationView.setOnItemSelectedListener { item ->
 
@@ -85,16 +79,7 @@ class patient_dashboard_activity : AppCompatActivity() {
                     // Appointments clicked
                     true
                 }
-                R.id.nav_profile-> {
-
-                    //sending data to profile
-                    var intent= Intent(this , patient_profile_Activity::class.java)
-                    intent.putExtra("fullname",name)
-                    intent.putExtra("gender",gender)
-                    intent.putExtra("email",email)
-                    intent.putExtra("phone_no",phoneNumber)
-                    intent.putExtra("BloodGroup",bloodgroup)
-                    startActivity(intent)
+                R.id.nav_profile->{
                     true
                 }
                 else -> false
@@ -102,6 +87,20 @@ class patient_dashboard_activity : AppCompatActivity() {
         }
 
     }
+
+    fun getdata(uid: String)
+    {
+        db.collection("users").document(uid).get()
+            .addOnSuccessListener { success->
+                patient_name=findViewById(R.id.patient_name)
+                patient_name.text="Hello, ${success.get("fullname")}"
+            }
+            .addOnFailureListener { fail->
+
+            }
+    }
+
+
 
 
 

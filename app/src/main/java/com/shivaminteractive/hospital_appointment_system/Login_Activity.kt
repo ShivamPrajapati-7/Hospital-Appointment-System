@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.set
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class Login_Activity : AppCompatActivity() {
 
@@ -17,6 +19,10 @@ class Login_Activity : AppCompatActivity() {
     lateinit var pass_input: EditText
     lateinit var login:Button
     lateinit var register:Button
+
+    private var auth= FirebaseAuth.getInstance()
+    private var db= FirebaseFirestore.getInstance()
+
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +39,54 @@ class Login_Activity : AppCompatActivity() {
 
 
 
+        login.setOnClickListener {
+            val email=email_input.text.toString().trim()
+            val password=pass_input.text.toString().trim()
+            login(email, password)
+        }
+
 
             //Register btn
         register.setOnClickListener {
             var intent= Intent(this, Registration_Actvity::class.java)
             startActivity(intent)
         }
+    }
+
+    fun login(email:String , pass:String){
+        auth.signInWithEmailAndPassword(email,pass)
+            .addOnSuccessListener { success->
+
+                Toast.makeText(this,"Successfully login",Toast.LENGTH_SHORT).show()
+                val uid=success.user!!.uid
+                userRole(uid)
+            }
+            .addOnFailureListener { fail->
+                Toast.makeText(this,"${fail.message}",Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    fun userRole(uid:String){
+        db.collection("users").document(uid).get()
+            .addOnSuccessListener { success->
+                val role=success.getString("role")
+
+                when(role)
+                {
+                    "patient"->{
+                        val intent= Intent(this, patient_dashboard_activity::class.java)
+                        intent.putExtra("uid",uid)
+                        startActivity(intent)
+                    }
+                    "doctor"->{
+                        val intent= Intent(this, Doctor_DashBoard_Activity::class.java)
+                        intent.putExtra("uid",uid)
+                        startActivity(intent)
+                    }
+                }
+            }
+            .addOnFailureListener { fail->
+                Toast.makeText(this,"Role not specify",Toast.LENGTH_SHORT).show()
+            }
     }
 }

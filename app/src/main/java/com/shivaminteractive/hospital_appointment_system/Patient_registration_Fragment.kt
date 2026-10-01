@@ -137,7 +137,7 @@ class Patient_registration_Fragment : Fragment() {
                     "gender" to gender,
                     "role" to "patient")
 
-                db.collection("patients").document(uid).set(patientData)
+                db.collection("users").document(uid).set(patientData)
                     .addOnSuccessListener { success ->
                         startActivity(Intent(context, patient_dashboard_activity::class.java))
                         Toast.makeText(context, "Successfull registration", Toast.LENGTH_SHORT).show()
