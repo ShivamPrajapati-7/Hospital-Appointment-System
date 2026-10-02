@@ -54,14 +54,16 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/docname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:text="Name"
                     android:textColor="#111827"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/speclization"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="General Physician"

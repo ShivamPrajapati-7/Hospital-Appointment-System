@@ -23,7 +23,7 @@
                 android:layout_height="50dp"
                 android:layout_marginRight="20dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/doctor_image"
+                android:src="@drawable/avatar"
                 app:shapeAppearanceOverlay="@style/CircleImageView" />
 
             <TextView

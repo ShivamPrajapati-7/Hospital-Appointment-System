@@ -12,6 +12,7 @@ import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Spinner
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,6 +31,7 @@ class DoctorRagistrationFragement : Fragment() {
     lateinit var confpass: EditText
     lateinit var concent : CheckBox
     lateinit var btnreg: Button
+    lateinit var speclaization: Spinner
     var gender:String=""
 
     private var auth= FirebaseAuth.getInstance()
@@ -53,6 +55,7 @@ class DoctorRagistrationFragement : Fragment() {
         confpass=view.findViewById(R.id.doctor_confirm_password)
         concent=view.findViewById(R.id.consent)
         btnreg=view.findViewById(R.id.btnRegistation)
+        speclaization=view.findViewById(R.id.sep)
 
 
         dob.setOnClickListener {
@@ -93,8 +96,9 @@ class DoctorRagistrationFragement : Fragment() {
             val email=docemail.text.toString().trim()
             val phone=docphone.text.toString().trim()
             val password=pass.text.toString().trim()
+            val specli=speclaization.selectedItem.toString().trim()
 
-            docterRegistration(name, email,phone,birth, licence ,password)
+            docterRegistration(name, email,phone,birth, licence ,password,specli)
 
         }
 
@@ -102,7 +106,7 @@ class DoctorRagistrationFragement : Fragment() {
         return view
     }
 
-    fun docterRegistration(fullname:String, email: String, phoneNumber: String, date_of_birth: String, licence: String, pass:String)
+    fun docterRegistration(fullname:String, email: String, phoneNumber: String, date_of_birth: String, licence: String, pass:String,speclization:String)
     {
 
         auth.createUserWithEmailAndPassword(email,pass)
@@ -115,13 +119,15 @@ class DoctorRagistrationFragement : Fragment() {
                     "phone" to phoneNumber,
                     "dob" to date_of_birth,
                     "licence" to licence,
+                    "spec" to speclization,
                     "gender" to gender,
                     "role" to "doctor"
                 )
 
                 db.collection("users").document(uid).set(doctordata)
                     .addOnSuccessListener { success->
-                        startActivity(Intent(context, Doctor_DashBoard_Activity::class.java))
+                        val intent = Intent(context, Doctor_DashBoard_Activity::class.java)
+                        intent.putExtra("uid",uid)//uid  not going to dashboard of doctor
                         Toast.makeText(context,"Registration Successful",Toast.LENGTH_SHORT).show()
 
                     }
@@ -134,5 +140,6 @@ class DoctorRagistrationFragement : Fragment() {
             }
 
     }
+
 
 }
