@@ -13,5 +13,6 @@
     <color name="pending">#77FFC400</color>
     <color name="complete">#7A76FF03</color>
     <color name="completed">#2F5F00</color>
+    <color name="selectbtn">#5D0B24</color>
 
 </resources>

@@ -53,6 +53,17 @@
             </LinearLayout>
 
         </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/selectDoctorBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Select"
+            app:backgroundTint="@null"
+            android:background="@drawable/selectbtn"
+            android:textColor="@color/selectbtn"/>
     </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

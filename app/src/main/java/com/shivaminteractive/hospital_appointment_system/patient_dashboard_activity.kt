@@ -1,5 +1,6 @@
 package com.shivaminteractive.hospital_appointment_system
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -51,15 +52,28 @@ class patient_dashboard_activity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-
-//        patient_name.text="Hello, $name"
-        val navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-
         val uid = intent.getStringExtra("uid")
         if (uid != null) {
             getdata(uid)
         }
+
+
+        book_appointment=findViewById(R.id.book_appointment)
+
+
+        //Book Appointment button
+        book_appointment.setOnClickListener {
+
+            val intent= Intent(this, BookAppointmentActivity::class.java)
+            intent.putExtra("uid",uid)
+            startActivity(intent)
+
+        }
+
+//        patient_name.text="Hello, $name"
+        val navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+
         //bottom navigation bar
         navigationView.setOnItemSelectedListener { item ->
 
