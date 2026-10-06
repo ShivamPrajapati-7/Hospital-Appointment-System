@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Spinner
@@ -36,6 +37,7 @@ class Patient_registration_Fragment : Fragment() {
     lateinit var patient_phone: EditText
     lateinit var patient_password: EditText
     lateinit var patient_confirm_password: EditText
+    lateinit var progressBar: ProgressBar
     var ispass=false
      var gender:String=" "
     private val auth = FirebaseAuth.getInstance()
@@ -61,6 +63,7 @@ class Patient_registration_Fragment : Fragment() {
         patient_password=view.findViewById(R.id.patient_password)
         patient_confirm_password=view.findViewById(R.id.patient_confirm_password)
         Gender_group = view.findViewById(R.id.patient_gender_group)
+        progressBar=view.findViewById(R.id.progressBar)
 
         //Date of Birth
         dob.setOnClickListener {
@@ -107,6 +110,7 @@ class Patient_registration_Fragment : Fragment() {
 
         //Registration Button
         btnpatientregistration.setOnClickListener {
+            progressBar.visibility= View.VISIBLE
             val fullname = name.text.toString().trim()
             val email = email_input.text.toString().trim()
             val phoneNumber = patient_phone.text.toString().trim()
@@ -139,18 +143,19 @@ class Patient_registration_Fragment : Fragment() {
 
                 db.collection("users").document(uid).set(patientData)
                     .addOnSuccessListener { success ->
+                        progressBar.visibility= View.GONE
                         startActivity(Intent(context, patient_dashboard_activity::class.java))
-                        Toast.makeText(context, "Successfull registration", Toast.LENGTH_SHORT).show()
 
                     }
                     .addOnFailureListener { fail->
+                        progressBar.visibility= View.GONE
                         Toast.makeText(context, "Firestore : ${fail.message}", Toast.LENGTH_SHORT).show()
                     }
 
 
             }
             .addOnFailureListener { fail->
-
+                progressBar.visibility= View.GONE
                 Toast.makeText(context, "FireAuth : ${fail.message}", Toast.LENGTH_SHORT).show()
 
             }

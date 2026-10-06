@@ -1,6 +1,7 @@
 package com.shivaminteractive.hospital_appointment_system
 
 import android.os.Bundle
+import android.widget.Button
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.enableEdgeToEdge
@@ -30,5 +31,10 @@ class BookAppointmentActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+              supportFragmentManager.beginTransaction()
+                  .replace(R.id.choisedoctor, ChoiseDoctorFragment())
+                  .commit()
+
     }
 }

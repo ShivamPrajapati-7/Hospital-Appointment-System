@@ -3,8 +3,10 @@ package com.shivaminteractive.hospital_appointment_system
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +21,7 @@ class Login_Activity : AppCompatActivity() {
     lateinit var pass_input: EditText
     lateinit var login:Button
     lateinit var register:Button
-
+    lateinit var progressBar: ProgressBar
     private var auth= FirebaseAuth.getInstance()
     private var db= FirebaseFirestore.getInstance()
 
@@ -36,12 +38,15 @@ class Login_Activity : AppCompatActivity() {
         pass_input=findViewById(R.id.pass_input)
         login=findViewById(R.id.btLogin)
         register=findViewById(R.id.btnRegistation)
+        progressBar=findViewById(R.id.progressBar)
 
 
 
         login.setOnClickListener {
             val email=email_input.text.toString().trim()
             val password=pass_input.text.toString().trim()
+            progressBar.visibility = View.VISIBLE
+
             login(email, password)
         }
 
@@ -56,12 +61,11 @@ class Login_Activity : AppCompatActivity() {
     fun login(email:String , pass:String){
         auth.signInWithEmailAndPassword(email,pass)
             .addOnSuccessListener { success->
-
-                Toast.makeText(this,"Successfully login",Toast.LENGTH_SHORT).show()
                 val uid=success.user!!.uid
                 userRole(uid)
             }
             .addOnFailureListener { fail->
+                progressBar.visibility=View.GONE
                 Toast.makeText(this,"${fail.message}",Toast.LENGTH_SHORT).show()
             }
     }
@@ -76,11 +80,14 @@ class Login_Activity : AppCompatActivity() {
                     "patient"->{
                         val intent= Intent(this, patient_dashboard_activity::class.java)
                         intent.putExtra("uid",uid)
+                        progressBar.visibility=View.GONE
                         startActivity(intent)
+
                     }
                     "doctor"->{
                         val intent= Intent(this, Doctor_DashBoard_Activity::class.java)
                         intent.putExtra("uid",uid)
+                        progressBar.visibility=View.GONE
                         startActivity(intent)
                     }
                 }

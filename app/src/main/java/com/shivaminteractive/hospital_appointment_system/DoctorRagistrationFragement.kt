@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Spinner
@@ -32,6 +33,7 @@ class DoctorRagistrationFragement : Fragment() {
     lateinit var concent : CheckBox
     lateinit var btnreg: Button
     lateinit var speclaization: Spinner
+    lateinit var  progressBar: ProgressBar
     var gender:String=""
 
     private var auth= FirebaseAuth.getInstance()
@@ -56,6 +58,7 @@ class DoctorRagistrationFragement : Fragment() {
         concent=view.findViewById(R.id.consent)
         btnreg=view.findViewById(R.id.btnRegistation)
         speclaization=view.findViewById(R.id.sep)
+        progressBar=view.findViewById(R.id.progressBar)
 
 
         dob.setOnClickListener {
@@ -89,7 +92,7 @@ class DoctorRagistrationFragement : Fragment() {
         }
 
         btnreg.setOnClickListener {
-
+            progressBar.visibility= View.VISIBLE
             val name =docname.text.toString().trim()
             val birth=dob.text.toString().trim()
             val licence=doclicence.text.toString().trim()
@@ -126,16 +129,19 @@ class DoctorRagistrationFragement : Fragment() {
 
                 db.collection("users").document(uid).set(doctordata)
                     .addOnSuccessListener { success->
+                        progressBar.visibility= View.GONE
                         val intent = Intent(context, Doctor_DashBoard_Activity::class.java)
                         intent.putExtra("uid",uid)//uid  not going to dashboard of doctor
-                        Toast.makeText(context,"Registration Successful",Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
 
                     }
                     .addOnFailureListener { fail->
+                        progressBar.visibility= View.GONE
                         Toast.makeText(context,"${fail.message}",Toast.LENGTH_SHORT).show()
                     }
             }
             .addOnFailureListener { fail->
+                progressBar.visibility= View.GONE
                 Toast.makeText(context,"${fail.message}",Toast.LENGTH_SHORT).show()
             }
 

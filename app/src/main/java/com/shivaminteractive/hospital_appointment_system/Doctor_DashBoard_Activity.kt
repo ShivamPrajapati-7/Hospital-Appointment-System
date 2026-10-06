@@ -32,8 +32,6 @@ class Doctor_DashBoard_Activity : AppCompatActivity() {
         if(uid!=null){
             setdata(uid)
         }
-
-
     }
     fun setdata(uid:String)
     {

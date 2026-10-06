@@ -162,6 +162,12 @@
                 android:layout_height="wrap_content"
                 android:textSize="14dp"
                 android:text="I agree the term and conditions and policies" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
 
