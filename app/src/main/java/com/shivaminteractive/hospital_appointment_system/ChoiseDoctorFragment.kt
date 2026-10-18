@@ -1,5 +1,4 @@
 package com.shivaminteractive.hospital_appointment_system
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -26,8 +25,15 @@ class ChoiseDoctorFragment : Fragment() {
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
         
         adaptor = doctorAdaptor(doctorList) { selectedDoctor ->
+            val fragment = appointment_schedule_Fragment().apply {
+                arguments = Bundle().apply {
+                    putString("docter_name", selectedDoctor.name)
+                    putString("docter_spec", selectedDoctor.spec)
+                    putString("docter_rating", selectedDoctor.rating)
+                }
+            }
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.choisedoctor, appointment_schedule_Fragment())
+                .replace(R.id.choisedoctor, fragment)
                 .addToBackStack(null)
                 .commit()
         }

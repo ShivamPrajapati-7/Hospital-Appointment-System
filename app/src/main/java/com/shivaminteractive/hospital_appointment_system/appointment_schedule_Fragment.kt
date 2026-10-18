@@ -18,12 +18,27 @@ class appointment_schedule_Fragment : Fragment() {
 
     lateinit var select_date: TextView
     lateinit var bookbtn: Button
+    lateinit var doctname: TextView
+    lateinit var doctspec: TextView
+    lateinit var doctrating: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view =inflater.inflate(R.layout.fragment_appointment_schedule_, container, false)
+
+        doctname=view.findViewById(R.id.Doctor_name_appointment)
+        doctspec=view.findViewById(R.id.docter_spec_appointment)
+        doctrating=view.findViewById(R.id.doctor_rating_appointment)
+
+        val doctername=arguments?.getString("docter_name")
+        val doctersepc=arguments?.getString("docter_spec")
+        val docterrating=arguments?.getString("docter_rating")
+
+        doctname.text=doctername.toString()
+        doctspec.text=doctersepc.toString()
+        doctrating.text=docterrating.toString()
         return view
     }
 
@@ -57,3 +72,4 @@ class appointment_schedule_Fragment : Fragment() {
              datePicker?.show()
         }
     }
+
