@@ -67,11 +67,14 @@
         android:textStyle="bold"
         android:textSize="24sp"
         android:textColor="@color/black"
-        android:text="Select Date" />
-    <TextView
-        android:id="@+id/date"
+        android:text="Select Date"/>
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="55dp"/>
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:overScrollMode="never"
+        android:id="@+id/dateselector"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,11 +83,13 @@
         android:textSize="24sp"
         android:textColor="@color/black"
         android:text="Select Time" />
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/time"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:nestedScrollingEnabled="false"/>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -123,8 +128,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Book Appointment"/>
-
-
 
 
 </LinearLayout>
