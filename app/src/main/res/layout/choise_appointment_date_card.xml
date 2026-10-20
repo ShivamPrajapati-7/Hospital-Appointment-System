@@ -6,6 +6,7 @@
 
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/carddate"
         android:layout_width="70dp"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp">
@@ -18,19 +19,21 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/dayname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/dayname"
                 android:text="Tue"
+                android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
+                android:textStyle="bold" />
+
             <TextView
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="11"
                 android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
