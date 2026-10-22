@@ -289,20 +289,21 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/dotor_name"
+                        android:id="@+id/doctor_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dr.Unnati Pal"
+                        android:text="Doctor Name"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/doctor_secilization"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="General Physician" />
+                        android:text="specialization" />
 
                     <TextView
                         android:id="@+id/appointment_time"
+                        android:text="00:00"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
@@ -490,32 +491,22 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="403dp"
+            android:layout_height="101dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigationView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:menu="@menu/patient_bottom_menu" />
-
-
-        </com.google.android.material.card.MaterialCardView>
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/patient_bottom_menu" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </LinearLayout>

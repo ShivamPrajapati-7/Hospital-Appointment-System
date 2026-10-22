@@ -27,6 +27,7 @@ class ChoiseDoctorFragment : Fragment() {
         adaptor = doctorAdaptor(doctorList) { selectedDoctor ->
             val fragment = appointment_schedule_Fragment().apply {
                 arguments = Bundle().apply {
+                    putString("DOCTOR_UID", selectedDoctor.doctorUid)
                     putString("docter_name", selectedDoctor.name)
                     putString("docter_spec", selectedDoctor.spec)
                     putString("docter_rating", selectedDoctor.rating)
@@ -49,7 +50,7 @@ class ChoiseDoctorFragment : Fragment() {
             .addOnSuccessListener { success ->
                 doctorList.clear()
                 for (document in success) {
-                    val doctor = document.toObject(doctor::class.java)
+                    val doctor = document.toObject(doctor::class.java).copy(doctorUid = document.id)
                     doctorList.add(doctor)
                 }
                 adaptor.notifyDataSetChanged()

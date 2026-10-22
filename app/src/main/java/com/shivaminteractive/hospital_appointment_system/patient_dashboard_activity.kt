@@ -55,6 +55,7 @@ class patient_dashboard_activity : AppCompatActivity() {
         val uid = intent.getStringExtra("uid")
         if (uid != null) {
             getdata(uid)
+            //doctor_appointment(uid)
         }
 
 
@@ -111,6 +112,22 @@ class patient_dashboard_activity : AppCompatActivity() {
             }
             .addOnFailureListener { fail->
 
+            }
+    }
+    fun doctor_appointment(uid: String)
+    {
+        db.collection("appointments").document(uid).get()
+            .addOnSuccessListener { success->
+                val docteruid=success.get("docterUid")
+                db.collection("users").document(docteruid as String).get()
+                    .addOnSuccessListener { docter->
+                        doctor_name=findViewById(R.id.doctor_name)
+                        doctor_name.text= docter.get("name").toString()
+                        doctor_specilization=findViewById(R.id.doctor_secilization)
+                        doctor_specilization.text= docter.get("spec").toString()
+                        appointment_time=findViewById(R.id.appointment_time)
+                        appointment_time.text=success.get("time").toString()
+                    }
             }
     }
 
