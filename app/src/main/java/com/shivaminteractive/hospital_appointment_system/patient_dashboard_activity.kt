@@ -42,9 +42,11 @@ class patient_dashboard_activity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_chat -> {
+                    loadFragment(chatFragment())
                     true
                 }
                 R.id.nav_profile -> {
+                    loadFragment(ProfileFragment())
                     true
                 }
                 else -> false
