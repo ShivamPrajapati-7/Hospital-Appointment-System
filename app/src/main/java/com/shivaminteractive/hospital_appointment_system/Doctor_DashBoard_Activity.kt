@@ -1,47 +1,68 @@
 package com.shivaminteractive.hospital_appointment_system
 
 import android.os.Bundle
-import android.widget.Spinner
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class Doctor_DashBoard_Activity : AppCompatActivity() {
 
-    lateinit var appointment: Fragment
-    lateinit var speclization: TextView
-    lateinit var name: TextView
-    private val db= FirebaseFirestore.getInstance()
+    private var uid: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_doctor_dash_board)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val uid = intent.getStringExtra("uid")
-        if(uid!=null){
-            setdata(uid)
+
+        uid = intent.getStringExtra("uid") ?: FirebaseAuth.getInstance().currentUser?.uid
+
+        if (savedInstanceState == null) {
+            loadFragment(createDashboardFragment())
+        }
+
+        val navigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        navigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    loadFragment(createDashboardFragment())
+                    true
+                }
+                R.id.nav_schadule -> {
+                    true
+                }
+                R.id.nav_chat -> {
+                    true
+                }
+                R.id.nav_profile -> {
+                    loadFragment(ProfileFragment())
+                    true
+                }
+                else -> false
+            }
         }
     }
-    fun setdata(uid:String)
-    {
-        db.collection("users").document(uid).get()
-            .addOnSuccessListener { success->
-                name=findViewById(R.id.docname)
-                name.text="Dr.${success.get("name")}"
 
-                speclization=findViewById(R.id.speclization)
-                speclization.text="${success.get("spec")}"
+    private fun createDashboardFragment(): Fragment {
+        return doctor_dashboard_Fragment().apply {
+            arguments = Bundle().apply {
+                putString("uid", uid)
             }
+        }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.doctor_fragment_container, fragment)
+            .commit()
     }
 }
