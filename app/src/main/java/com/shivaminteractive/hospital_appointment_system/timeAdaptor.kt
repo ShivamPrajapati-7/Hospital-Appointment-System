@@ -10,18 +10,21 @@ import com.google.android.material.card.MaterialCardView
 
 class timeAdaptor(
     private val slotList: List<TimeSlotModel>,
-    private val ontimeselected:(String)->Unit
-): RecyclerView.Adapter<timeAdaptor.TimeViewHolder>(){
-    class TimeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val cardtime: MaterialCardView=itemView.findViewById(R.id.timecard)
-        val time: TextView=itemView.findViewById(R.id.time)
+    private val ontimeselected: (String) -> Unit
+) : RecyclerView.Adapter<timeAdaptor.TimeViewHolder>() {
+
+    class TimeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val cardtime: MaterialCardView = itemView.findViewById(R.id.timecard)
+        val time: TextView = itemView.findViewById(R.id.time)
     }
-    private var selectedPosition =-1
+
+    private var selectedPosition = -1
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): TimeViewHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.choise_appointment_time_card,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.choise_appointment_time_card, parent, false)
         return TimeViewHolder(view)
     }
 
@@ -29,18 +32,17 @@ class timeAdaptor(
         holder: TimeViewHolder,
         position: Int
     ) {
-        val slot=slotList[position]
-        holder.time.text=slot.time
+        val slot = slotList[position]
+        holder.time.text = slot.time
 
-        when{
-            slot.isBooked->
-            {
+        when {
+            slot.isBooked -> {
                 holder.cardtime.setCardBackgroundColor(Color.parseColor("#E9ECEF"))
                 holder.cardtime.strokeWidth = 0
                 holder.time.setTextColor(Color.parseColor("#ADB5BD"))
                 holder.itemView.isEnabled = false
             }
-            selectedPosition==position->{
+            selectedPosition == position -> {
                 holder.cardtime.setCardBackgroundColor(Color.parseColor("#0D6EFD"))
                 holder.cardtime.strokeWidth = 0
                 holder.time.setTextColor(Color.WHITE)
@@ -53,21 +55,19 @@ class timeAdaptor(
                 holder.time.setTextColor(Color.parseColor("#0D1B2A"))
                 holder.itemView.isEnabled = true
             }
-
         }
+
         holder.itemView.setOnClickListener {
-            val previousPosition=selectedPosition
-            selectedPosition=holder.bindingAdapterPosition
+            if (slot.isBooked) return@setOnClickListener
+            val previousPosition = selectedPosition
+            selectedPosition = holder.bindingAdapterPosition
             notifyItemChanged(previousPosition)
             notifyItemChanged(selectedPosition)
             ontimeselected(slot.time)
         }
-
     }
 
     override fun getItemCount(): Int {
         return slotList.size
     }
-
-
 }

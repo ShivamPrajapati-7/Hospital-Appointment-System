@@ -15,6 +15,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class appointment_schedule_Fragment : Fragment(R.layout.fragment_appointment_schedule_) {
@@ -140,8 +141,29 @@ class appointment_schedule_Fragment : Fragment(R.layout.fragment_appointment_sch
             .addOnSuccessListener { querySnapshot ->
                 val bookedTimes = querySnapshot.documents.mapNotNull { it.getString("time") }.toSet()
 
-                val slotModels = doctorBaseSlots.map { time ->
-                    TimeSlotModel(time = time, isBooked = bookedTimes.contains(time))
+                val todayDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                val isToday = (date == todayDateStr)
+
+                val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+                val nowTimeStr = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(Date())
+                val nowTime = try { timeFormat.parse(nowTimeStr) } catch (e: Exception) { null }
+
+                val availableSlots = doctorBaseSlots.filter { slot ->
+                    if (bookedTimes.contains(slot)) return@filter false
+
+                    if (isToday && nowTime != null) {
+                        try {
+                            val slotTime = timeFormat.parse(slot)
+                            if (slotTime != null && slotTime.before(nowTime)) {
+                                return@filter false
+                            }
+                        } catch (e: Exception) { }
+                    }
+                    true
+                }
+
+                val slotModels = availableSlots.map { time ->
+                    TimeSlotModel(time = time, isBooked = false)
                 }
 
                 rvTimeSlots.adapter = timeAdaptor(slotModels) { clickedTime ->

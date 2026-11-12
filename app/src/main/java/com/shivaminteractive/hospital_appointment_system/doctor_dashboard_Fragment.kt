@@ -73,10 +73,10 @@ class doctor_dashboard_Fragment : Fragment() {
             .whereEqualTo("doctorUid", uid)
             .get()
             .addOnSuccessListener { querySnapshot ->
-                val total = querySnapshot.size()
-                totalCount.text = total.toString()
-
                 val todayDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                val dateSdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val todayDate = try { dateSdf.parse(todayDateStr) } catch (_: Exception) { null }
+
                 var todayCountVal = 0
                 var pendingCountVal = 0
 
@@ -88,6 +88,12 @@ class doctor_dashboard_Fragment : Fragment() {
                     val status = doc.getString("status") ?: "Confirmed"
                     val patientName = doc.getString("patient_Name") ?: "Patient"
                     val patientUid = doc.getString("patientUid") ?: ""
+
+                    // Filter out past appointments
+                    val appDate = try { dateSdf.parse(date) } catch (_: Exception) { null }
+                    if (appDate != null && todayDate != null && appDate.before(todayDate)) {
+                        continue
+                    }
 
                     if (date == todayDateStr) {
                         todayCountVal++
@@ -106,6 +112,7 @@ class doctor_dashboard_Fragment : Fragment() {
                     )
                 }
 
+                totalCount.text = appointmentList.size.toString()
                 todayCount.text = todayCountVal.toString()
                 pendingCount.text = pendingCountVal.toString()
 

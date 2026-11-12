@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class patient_dashboard_Fragment : Fragment() {
 
@@ -67,7 +68,6 @@ class patient_dashboard_Fragment : Fragment() {
         precautions = view.findViewById(R.id.precautions)
         feedback = view.findViewById(R.id.feedback)
 
-
         if (patientUid.isNotEmpty()) {
             getdata(patientUid)
             doctor_appointment(patientUid)
@@ -113,19 +113,33 @@ class patient_dashboard_Fragment : Fragment() {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
-                    val document = querySnapshot.documents[0]
-                    val doctorUid = document.getString("doctorUid") ?: ""
-                    val time = document.getString("time") ?: ""
-                    val date = document.getString("date") ?: ""
+                    val todayDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                    val dateSdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    val todayDate = try { dateSdf.parse(todayDateStr) } catch (_: Exception) { null }
 
-                    appointment_time.text = "$date $time"
+                    // Find first upcoming (non-passed) appointment
+                    val upcomingDoc = querySnapshot.documents.firstOrNull { doc ->
+                        val date = doc.getString("date") ?: ""
+                        val appDate = try { dateSdf.parse(date) } catch (_: Exception) { null }
+                        appDate == null || todayDate == null || !appDate.before(todayDate)
+                    }
 
-                    if (doctorUid.isNotEmpty()) {
-                        db.collection("users").document(doctorUid).get()
-                            .addOnSuccessListener { doc ->
-                                doctor_name.text = doc.getString("name") ?: doc.getString("fullname") ?: "Doctor"
-                                doctor_specilization.text = doc.getString("spec") ?: doc.getString("specialization") ?: ""
-                            }
+                    if (upcomingDoc != null) {
+                        val doctorUid = upcomingDoc.getString("doctorUid") ?: ""
+                        val time = upcomingDoc.getString("time") ?: ""
+                        val date = upcomingDoc.getString("date") ?: ""
+
+                        appointment_time.text = "$date $time"
+
+                        if (doctorUid.isNotEmpty()) {
+                            db.collection("users").document(doctorUid).get()
+                                .addOnSuccessListener { doc ->
+                                    doctor_name.text = doc.getString("name") ?: doc.getString("fullname") ?: "Doctor"
+                                    doctor_specilization.text = doc.getString("spec") ?: doc.getString("specialization") ?: ""
+                                }
+                        }
+                    } else {
+                        appointment_time.text = "No upcoming appointments"
                     }
                 }
             }

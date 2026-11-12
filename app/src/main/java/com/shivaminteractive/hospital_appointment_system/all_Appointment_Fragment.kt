@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class all_Appointment_Fragment : Fragment() {
 
@@ -52,10 +55,21 @@ class all_Appointment_Fragment : Fragment() {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 appointmentList.clear()
+
+                val todayDateStr = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                val dateSdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val todayDate = try { dateSdf.parse(todayDateStr) } catch (_: Exception) { null }
+
                 for (document in querySnapshot) {
                     val doctorUid = document.getString("doctorUid") ?: ""
                     val date = document.getString("date") ?: ""
                     val time = document.getString("time") ?: ""
+
+                    // Skip past appointments
+                    val appDate = try { dateSdf.parse(date) } catch (_: Exception) { null }
+                    if (appDate != null && todayDate != null && appDate.before(todayDate)) {
+                        continue
+                    }
 
                     if (doctorUid.isNotEmpty()) {
                         db.collection("users").document(doctorUid).get()
