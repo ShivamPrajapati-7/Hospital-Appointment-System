@@ -1,5 +1,6 @@
 package com.shivaminteractive.hospital_appointment_system
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -86,6 +87,7 @@ class doctor_dashboard_Fragment : Fragment() {
                     val time = doc.getString("time") ?: ""
                     val status = doc.getString("status") ?: "Confirmed"
                     val patientName = doc.getString("patient_Name") ?: "Patient"
+                    val patientUid = doc.getString("patientUid") ?: ""
 
                     if (date == todayDateStr) {
                         todayCountVal++
@@ -98,7 +100,8 @@ class doctor_dashboard_Fragment : Fragment() {
                         patientData(
                             name = patientName,
                             time = "$date $time".trim(),
-                            status = status
+                            status = status,
+                            patientUid = patientUid
                         )
                     )
                 }
@@ -107,7 +110,12 @@ class doctor_dashboard_Fragment : Fragment() {
                 pendingCount.text = pendingCountVal.toString()
 
                 recyclerview.adapter = Doctor_Appointment(appointmentList) { selectedPatient ->
-
+                    val intent = Intent(requireContext(), Patient_Info_Activity::class.java).apply {
+                        putExtra("patient_name", selectedPatient.name)
+                        putExtra("patient_uid", selectedPatient.patientUid)
+                        putExtra("appointment_time", selectedPatient.time)
+                    }
+                    startActivity(intent)
                 }
             }
             .addOnFailureListener { e ->

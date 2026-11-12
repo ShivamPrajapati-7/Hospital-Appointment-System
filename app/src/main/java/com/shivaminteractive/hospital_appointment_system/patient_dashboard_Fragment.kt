@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -65,6 +66,7 @@ class patient_dashboard_Fragment : Fragment() {
         health_tips = view.findViewById(R.id.health_tips)
         precautions = view.findViewById(R.id.precautions)
         feedback = view.findViewById(R.id.feedback)
+
 
         if (patientUid.isNotEmpty()) {
             getdata(patientUid)

@@ -101,7 +101,15 @@ class DoctorRagistrationFragement : Fragment() {
             val password=pass.text.toString().trim()
             val specli=speclaization.selectedItem.toString().trim()
 
-            docterRegistration(name, email,phone,birth, licence ,password,specli)
+            if(concent.isChecked)
+            {
+                docterRegistration(name, email,phone,birth, licence ,password,specli)
+            }
+            else{
+                Toast.makeText(context,"Tick the Check Box", Toast.LENGTH_SHORT).show()
+            }
+
+
 
         }
 

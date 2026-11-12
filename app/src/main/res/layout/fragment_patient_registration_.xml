@@ -120,26 +120,54 @@
                 android:padding="15dp" />
 
             <EditText
-                android:id="@+id/patient_password"
+                android:id="@+id/patient_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/login_area"
-                android:drawableStart="@drawable/lock"
+                android:drawableStart="@drawable/address"
                 android:drawablePadding="16dp"
                 android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword"
+                android:hint="Address"
+                android:inputType="phone"
                 android:padding="15dp" />
 
 
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:layout_marginBottom="20dp">
+
+                <EditText
+                    android:id="@+id/patient_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/login_area"
+                    android:drawableStart="@drawable/lock"
+                    android:drawablePadding="16dp"
+                    android:ems="10"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:padding="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true"
+                android:layout_marginBottom="20dp">
             <EditText
                 android:id="@+id/patient_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
                 android:background="@drawable/login_area"
                 android:drawableStart="@drawable/lock"
                 android:drawablePadding="16dp"
@@ -147,6 +175,8 @@
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:padding="15dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
                 android:id="@+id/concent"

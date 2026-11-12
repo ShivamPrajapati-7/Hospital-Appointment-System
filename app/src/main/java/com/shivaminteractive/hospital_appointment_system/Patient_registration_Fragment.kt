@@ -17,6 +17,7 @@ import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Spinner
+import android.widget.TextClock
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -38,6 +39,7 @@ class Patient_registration_Fragment : Fragment() {
     lateinit var patient_password: EditText
     lateinit var patient_confirm_password: EditText
     lateinit var progressBar: ProgressBar
+    lateinit var  patientaddress: TextView
     var ispass=false
      var gender:String=" "
     private val auth = FirebaseAuth.getInstance()
@@ -64,6 +66,7 @@ class Patient_registration_Fragment : Fragment() {
         patient_confirm_password=view.findViewById(R.id.patient_confirm_password)
         Gender_group = view.findViewById(R.id.patient_gender_group)
         progressBar=view.findViewById(R.id.progressBar)
+        patientaddress=view.findViewById(R.id.patient_address)
 
         //Date of Birth
         dob.setOnClickListener {
@@ -118,15 +121,22 @@ class Patient_registration_Fragment : Fragment() {
             val bloodgroup = BloodGroup.selectedItem.toString().trim()
             val pass = patient_password.text.toString().trim()
             val conf_pass= patient_confirm_password.text.toString().trim()
+            val address=patientaddress.toString().trim()
 
 
-            registerPatient(fullname, email, phoneNumber, date_of_birth, bloodgroup, pass, conf_pass)
+            if(concent.isChecked)
+            {
+                registerPatient(fullname, email, phoneNumber, date_of_birth, bloodgroup, pass, conf_pass,address)
+            }
+            else{
+                Toast.makeText(context,"Tick the Check Box", Toast.LENGTH_SHORT).show()
+            }
 
         }
         return view
     }
 
-    private fun registerPatient( fullname:String, email: String, phoneNumber: String, date_of_birth: String, bloodgroup: String,pass:String,conf_pass:String) {
+    private fun registerPatient( fullname:String, email: String, phoneNumber: String, date_of_birth: String, bloodgroup: String,pass:String,conf_pass:String, address:String) {
 
         auth.createUserWithEmailAndPassword(email,pass)
             .addOnSuccessListener { sucess->
@@ -139,6 +149,7 @@ class Patient_registration_Fragment : Fragment() {
                     "date_of_birth" to date_of_birth,
                     "bloodgroup" to bloodgroup,
                     "gender" to gender,
+                    "Address" to address,
                     "role" to "patient")
 
                 db.collection("users").document(uid).set(patientData)
